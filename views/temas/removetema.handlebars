@@ -1,15 +1,8 @@
-<!--<h4>Modelos: </h4>
-
-{{#each modelos}}
-<a href="/modelos/{{slug}}"><h5>{{nome}}</h5></a>
-{{else}}
-
-{{/each}}-->
 
 
-<h4>Modelos disponiveis</h4>
+<h4>Lista de postagens encontradas</h4>
 
-
+ 
 <main>
 
    {{#each postagens}}
@@ -35,11 +28,8 @@
              
 
 
-            <a href="https://api.whatsapp.com/send?phone=55345534999967903&text=Tenho%20interesse%20no%20tema {{nome}}
-            https://uploadmpdecoracoes.s3.amazonaws.com/{{key}}" class="button" target="_blank">
-
-        <img src="/img/icons/whatsapp.svg" alt="whatsapp">Contato
-        </a>
+<a href="/admin/postagens/deletar/{{_id}}"><button class="btn btn-danger mt-3" id="deletetema">Deletar</button></a>
+ 
         </footer>
     </article>
 {{else}}
@@ -49,4 +39,3 @@
   {{/each}}
 
 </main>
-

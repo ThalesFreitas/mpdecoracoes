@@ -383,16 +383,49 @@ router.post("/modelos/deletar", eAdmin, (req, res) => {
         res.redirect("/admin/modelos")
     })
 })
+////////Painel ADM Remover Temas
+router.get("/removetema/:slugtema", (req, res) => {
+    Slugtema.findOne({slugtema: req.params.slugtema}).then((slugtema) => {
+    if(slugtema){
+   
+    Postagem.find({slugtema: slugtema._id}).lean().populate("categoria").sort({data: "desc"}).populate("modelo").then((postagens) => {
+   
+   Slugtema.find().lean().then((exibirslugtemas) => {
+   
+   res.render("temas/removetema", {postagens: postagens, slugtema: slugtema, slugtemas: exibirslugtemas})
+   
+   }).catch((err) => {
+       req.flash("error_msg", "Houve um erro ao listar os temas!")
+       res.redirect("/")
+   })
+})
+}else{
+   req.flash("error_msg", "Este tema não existe")
+   res.redirect("/")
+}
+
+}).catch((err) => {
+req.flash("error_msg", "Houve um erro interno ao carregar a página deste tema")
+res.redirect("/")
+})
+})
 
 //Painel ADM Listar Posts
 router.get("/postagens", eAdmin, (req, res) => {
     //Exibir postagens pela data
     Postagem.find().lean().populate("categoria").sort({data: "desc"}).populate("modelo").then((postagens) => {
-        res.render("admin/postagens", {postagens: postagens})
+       
+    Slugtema.find().lean().then((slugtemas) => {
+        res.render("admin/postagens", {postagens: postagens, slugtemas: slugtemas})
+
     }).catch((err) => {
-        req.flash("error_msg", "Houve um erro ao listar as postagens")
+        req.flash("error_msg", "Houve um erro ao listar os temas")
         res.redirect("/admin")
     })
+}).catch((err) => {
+    req.flash("error_msg", "Houve um erro interno ao listar as postagens")
+    res.redirect("/")
+})
 })
 
 

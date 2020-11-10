@@ -124,44 +124,6 @@ app.get('/', (req, res) => {
 })
    
 })
-//teste json
-app.get('/post', (req, res) => {
-
-    Postagem.find().lean().populate("categoria").sort({data: "desc"}).populate("modelo").then((postagens) => {
-   
-   
-    Slugtema.find().lean().then((slugtemas) => {
-    
-
-    Categoria.find().lean().then((categorias) => {
-    
-          
-     Modelo.find().lean().then((modelos) => {
-     //res.render('index', {postagens: postagens,slugtemas: slugtemas,categorias: categorias,modelos: modelos});
-     res.json.render('index', {postagens: postagens,slugtemas: slugtemas,categorias: categorias,modelos: modelos});
-    
-    }).catch((err) => {
-        req.flash("error_msg", "Houve um erro interno ao listar os modelos")
-        res.redirect("/")
-})
-
-}).catch((err) => {
-    req.flash("error_msg", "Houve um erro interno ao listar as categorias")
-    res.redirect("/")
-})
-
-}).catch((err) => {
-    req.flash("error_msg", "Houve um erro interno ao listar os slugtemas")
-    res.redirect("/")
-})
-
-}).catch((err) => {
-    req.flash("error_msg", "Houve um erro interno ao listar as postagens")
-    res.redirect("/")
-})
-   
-})
-
 
             //Listar temas disponiveis
         app.get("/temas/:slugtema", (req, res) => {
