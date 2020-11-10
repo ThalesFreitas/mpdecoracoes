@@ -98,13 +98,13 @@ router.get('/slugtemas/add',  (req, res) => {
 })
 
 //Rota Admin Cadastro Modelo
-router.get('/modelos/add',  (req, res) => {
+router.get('/modelos/add', eAdmin, (req, res) => {
     res.render("admin/addmodelos")
 })
 
 
 ////Rota Admin Salvar Categoria no Mongodb
-router.post('/categorias/nova',  (req, res) => {
+router.post('/categorias/nova', eAdmin, (req, res) => {
     
     var erros = []
     if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null){
@@ -138,7 +138,7 @@ router.post('/categorias/nova',  (req, res) => {
 
 
 ////Rota Admin Salvar Slugtema no Mongodb
-router.post('/slugtemas/nova',  (req, res) => {
+router.post('/slugtemas/nova', eAdmin, (req, res) => {
     
     var erros = []
     if(!req.body.slugtema || typeof req.body.slugtema == undefined || req.body.slugtema == null){
@@ -165,7 +165,7 @@ router.post('/slugtemas/nova',  (req, res) => {
 
 
 ////Rota Admin Salvar Modelo no Mongodb
-router.post('/modelos/nova',  (req, res) => {
+router.post('/modelos/nova', eAdmin, (req, res) => {
     
     var erros = []
     if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null){
@@ -198,7 +198,7 @@ router.post('/modelos/nova',  (req, res) => {
 })
 
 ////Rota Admin Editar Categoria
-router.get("/categorias/edit/:id",  (req, res) => {
+router.get("/categorias/edit/:id", eAdmin, (req, res) => {
     Categoria.findOne({_id:req.params.id}).lean().then((categoria) => {
         res.render("admin/editcategorias", {categoria: categoria})
 
@@ -209,7 +209,7 @@ router.get("/categorias/edit/:id",  (req, res) => {
 })
 
 ////Rota Admin Editar Slugtema
-router.get("/slugtemas/edit/:id",  (req, res) => {
+router.get("/slugtemas/edit/:id", eAdmin, (req, res) => {
     Slugtema.findOne({_id:req.params.id}).lean().then((slugtema) => {
         res.render("admin/editslugtemas", {slugtema: slugtema})
 
@@ -220,7 +220,7 @@ router.get("/slugtemas/edit/:id",  (req, res) => {
 })
 
 ////Rota Admin Editar Modelo
-router.get("/modelos/edit/:id",  (req, res) => {
+router.get("/modelos/edit/:id", eAdmin, (req, res) => {
     Modelo.findOne({_id:req.params.id}).lean().then((modelo) => {
         res.render("admin/editmodelos", {modelo: modelo})
 
@@ -232,7 +232,7 @@ router.get("/modelos/edit/:id",  (req, res) => {
 
 
 ////Rota Admin Salvar Edição Categoria
-router.post("/categorias/edit",  (req, res) => {
+router.post("/categorias/edit", eAdmin, (req, res) => {
 
     //validação do formulario
     var erros = []
@@ -274,7 +274,7 @@ router.post("/categorias/edit",  (req, res) => {
 })
 
 ////Rota Admin Salvar Edição Slugtema
-router.post("/slugtemas/edit",  (req, res) => {
+router.post("/slugtemas/edit", eAdmin, (req, res) => {
 
     //validação do formulario
     var erros = []
@@ -309,7 +309,7 @@ router.post("/slugtemas/edit",  (req, res) => {
 })
 
 ////Rota Admin Salvar Edição Modelo
-router.post("/modelos/edit",  (req, res) => {
+router.post("/modelos/edit", eAdmin, (req, res) => {
 
     //validação do formulario
     var erros = []
@@ -352,7 +352,7 @@ router.post("/modelos/edit",  (req, res) => {
 
 
 ////Rota Admin Deletar Categoria
-router.post("/categorias/deletar",  (req, res) => {
+router.post("/categorias/deletar", eAdmin, (req, res) => {
     Categoria.deleteOne({_id: req.body.id}).then(() => {
         req.flash("success_msg", "Categoria deletada com sucesso!")
         res.redirect("/admin/categorias")
@@ -363,7 +363,7 @@ router.post("/categorias/deletar",  (req, res) => {
 })
 
 ////Rota Admin Deletar Slugtema
-router.post("/slugtemas/deletar",  (req, res) => {
+router.post("/slugtemas/deletar", eAdmin, (req, res) => {
     Slugtema.deleteOne({_id: req.body.id}).then(() => {
         req.flash("success_msg", "Slug do tema deletado com sucesso!")
         res.redirect("/admin/slugtemas")
@@ -374,7 +374,7 @@ router.post("/slugtemas/deletar",  (req, res) => {
 })
 
 ////Rota Admin Deletar Modelo
-router.post("/modelos/deletar",  (req, res) => {
+router.post("/modelos/deletar", eAdmin, (req, res) => {
     Modelo.deleteOne({_id: req.body.id}).then(() => {
         req.flash("success_msg", "Modelo deletado com sucesso!")
         res.redirect("/admin/modelos")
@@ -385,7 +385,7 @@ router.post("/modelos/deletar",  (req, res) => {
 })
 
 //Painel ADM Listar Posts
-router.get("/postagens",  (req, res) => {
+router.get("/postagens", eAdmin, (req, res) => {
     //Exibir postagens pela data
     Postagem.find().lean().populate("categoria").sort({data: "desc"}).populate("modelo").then((postagens) => {
         res.render("admin/postagens", {postagens: postagens})
@@ -397,7 +397,7 @@ router.get("/postagens",  (req, res) => {
 
 
 ////Rota Admin Cadastro de  Postagem
-router.get("/postagens/add",  (req, res) => {
+router.get("/postagens/add", eAdmin, (req, res) => {
     
    Categoria.find().lean().then((categorias) => {
 
@@ -424,7 +424,7 @@ router.get("/postagens/add",  (req, res) => {
 
 
 ////Rota Admin Salvar Postagem com Amazon S3
-router.post("/postagens/nova", multer(multerConfig).single('file'),  (req, res) => {
+router.post("/postagens/nova", multer(multerConfig).single('file'), eAdmin, (req, res) => {
 
 
     const { originalname: name, size, key, location: url = ''} = req.file;
@@ -458,7 +458,7 @@ router.post("/postagens/nova", multer(multerConfig).single('file'),  (req, res) 
    
 
 //Editando postagens
-router.get("/postagens/edit/:id/:key",  (req, res) => {
+router.get("/postagens/edit/:id/:key", eAdmin, (req, res) => {
      
 
     const keys = req.params.key;
@@ -502,7 +502,7 @@ router.get("/postagens/edit/:id/:key",  (req, res) => {
 })
 
 //Atualiza os dados da postagem editada
-router.post("/postagem/edit", multer(multerConfig).single('file'),  (req, res) => {
+router.post("/postagem/edit", multer(multerConfig).single('file'), eAdmin, (req, res) => {
    
   Postagem.findOne({_id: req.body.id}).then((postagem) => {
    
@@ -540,7 +540,7 @@ router.post("/postagem/edit", multer(multerConfig).single('file'),  (req, res) =
 
 
 //////Rota Admin Deletar Postagem
-router.get("/postagens/deletar/:id" ,  async (req, res) => {
+router.get("/postagens/deletar/:id" , eAdmin, async (req, res) => {
     const post = await Postagem.findById(req.params.id);
     await post.remove();
     req.flash("success_msg", "Postagem deletada com sucesso!")
