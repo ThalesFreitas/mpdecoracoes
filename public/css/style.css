@@ -2,85 +2,6 @@ body {
     background-color: white;
 }
 
-
-#page-home #container {
-    width: 100vw;
-    height: 100vh;
-    align-items: center;
-    
-   
-}
-
-.page-header {
-    background-color: var(--color-background-temas);
-    display: flex;
-    height: 22vh;
-    
-    
-}
-
-.header-content {
-height: 5rem;
-width: 100vw;
-padding: 5px;
-border: solid green;
-
-}
-
-#search-theme input {
-    padding: 1rem;
-    margin-left: -6.5rem;
-    margin-top: 1rem;
-    width: 12.8rem;
-    height: 2.6rem;
-    border-radius: 0.8rem;
-    outline:0 ;
-    padding: 0 1.6rem;
-    background-color:#E0EEEE;
-    border:solid 2px #5F9EA0;
-    }
-
-#search-theme button {
-margin-left: 0.1rem;
-font-size: 15px;
-font-weight:bold;
-border:none;
-width: 4rem;
-height: 2.4rem;
-border-radius: 3px 7px 7px 3px;
-background-color: var(--color-mp);
-}
-
-#search-theme {
-    margin-top: 0.2rem;
-    margin-left: -18rem;
-    width: 70%;
-    height: 2.6rem;
-    
-    }
-   
-
-.logomarca {
-    
-    display: flex;
-   /*border: solid red;*/
-    height: 100%;
-    width: 100vw;
-}
-
-
-.logomarca img {
-    margin-left: -15px;
-    height: 15rem;
-    width: 38rem;
-}
-
-#page-home main {
-    margin: 4.2rem auto;
-    width: 90%;
-    
-}
-
 .theme-item {
    
     width: 28rem;
@@ -107,7 +28,7 @@ background-color: var(--color-mp);
     
     margin-top: -1.2rem;
     margin-bottom: -1.4rem;
-    width: 28rem;
+    width: 25rem;
     height: 24rem;
 }
 
