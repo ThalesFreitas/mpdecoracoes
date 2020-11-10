@@ -384,7 +384,7 @@ router.post("/modelos/deletar", eAdmin, (req, res) => {
     })
 })
 ////////Painel ADM Remover Temas
-router.get("/removetema/:slugtema", (req, res) => {
+router.get("/removetema/:slugtema", eAdmin, (req, res) => {
     Slugtema.findOne({slugtema: req.params.slugtema}).then((slugtema) => {
     if(slugtema){
    
