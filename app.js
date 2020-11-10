@@ -101,7 +101,7 @@ app.get('/', (req, res) => {
           
      Modelo.find().lean().then((modelos) => {
      res.render('index', {postagens: postagens,slugtemas: slugtemas,categorias: categorias,modelos: modelos});
-     
+     res.json(postagens);
      
     
     }).catch((err) => {
