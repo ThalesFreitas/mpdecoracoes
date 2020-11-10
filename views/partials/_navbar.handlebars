@@ -88,10 +88,10 @@
 
       {{#if user}}
 
- <li class="nav-item dropdown" id="adicionar">
-        <!--<a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <li class="nav-item dropdown" id="adicionar">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
           Adicionar
-        </a>-->
+        </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/admin/postagens">Postagem</a>
            <a class="dropdown-item" href="/admin/slugtemas">Slugtema</a>
@@ -105,29 +105,20 @@
         <a class="nav-link " href="/usuarios/logout" tabindex="-1" aria-disabled="true">Sair</a>
       </li>
       {{else}}
-
-      <li class="nav-item dropdown" id="adicionar">
-        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          Adicionar
-        </a>
+ <li class="nav-item">
+        <a class="nav-link " href="/usuarios/login" tabindex="-1" aria-disabled="true">Login</a>
+      </li>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/admin/postagens">Postagem</a>
            <a class="dropdown-item" href="/admin/slugtemas">Slugtema</a>
            <a class="dropdown-item" href="/admin/categorias">Categoria</a>
           <a class="dropdown-item" href="/admin/modelos">Modelo</a>   
                 
-        </li>
-
-
-
-
-
-       <li class="nav-item">
-        <a class="nav-link " href="/usuarios/login" tabindex="-1" aria-disabled="true">Login</a>
-      </li>
-       <li class="nav-item">
+        
+      
+       <!--<li class="nav-item">
         <a class="nav-link " href="/usuarios/registro" tabindex="-1" aria-disabled="true">Registro</a>
-      </li>
+      </li>-->
      
 
       {{/if}}

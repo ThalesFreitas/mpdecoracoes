@@ -38,7 +38,7 @@ const Postagem = mongoose.model("postagens")
 const {eAdmin}= require("../helpers/eAdmin")
 
 
-router.get('/',  (req, res) => {
+router.get('/', eAdmin, (req, res) => {
    res.render("admin/index")
    
 })
@@ -47,7 +47,7 @@ router.get('/',  (req, res) => {
 
 
 // Rota Admin Listar categorias
-router.get('/categorias',  (req, res) => {
+router.get('/categorias', eAdmin, (req, res) => {
     
     Categoria.find().sort({data: 'desc'}).then((categorias) => {
         res.render('./admin/categorias', {categorias: categorias.map(Categoria =>
@@ -66,7 +66,7 @@ router.get('/categorias',  (req, res) => {
 
 
 // Rota Admin Listar Slugtemas
-router.get('/slugtemas',  (req, res) => {
+router.get('/slugtemas', eAdmin, (req, res) => {
     Slugtema.find().sort({data: 'desc'}).then((slugtemas) => {
         res.render('./admin/slugtemas', {slugtemas: slugtemas.map(Slugtema =>
             Slugtema.toJSON())})
@@ -78,7 +78,7 @@ router.get('/slugtemas',  (req, res) => {
 })
 
 // Rota Admin Listar modelos
-router.get('/modelos',  (req, res) => {
+router.get('/modelos', eAdmin, (req, res) => {
     Modelo.find().sort({date: 'desc'}).then((modelos) => {
         res.render('./admin/modelos', {modelos: modelos.map(Modelo =>
             Modelo.toJSON())})
@@ -89,11 +89,11 @@ router.get('/modelos',  (req, res) => {
 })
 
 //Rota Admin Cadastro Categoria
-router.get('/categorias/add',  (req, res) => {
+router.get('/categorias/add', eAdmin, (req, res) => {
     res.render("admin/addcategorias")
 })
 //Rota Admin Cadastro Slugtema
-router.get('/slugtemas/add',  (req, res) => {
+router.get('/slugtemas/add', eAdmin, (req, res) => {
     res.render("admin/addslugtemas")
 })
 
