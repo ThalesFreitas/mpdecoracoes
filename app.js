@@ -32,9 +32,12 @@ require("./config/auth")(passport)
 
 
 const cors = require('cors');
+const { json } = require('body-parser');
+const { parseJSON } = require('date-fns');
+const { request } = require('http');
 
 
-app.use(cors());
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
@@ -100,8 +103,9 @@ app.get('/', (req, res) => {
     
           
      Modelo.find().lean().then((modelos) => {
+         
+
      res.render('index', {postagens: postagens,slugtemas: slugtemas,categorias: categorias,modelos: modelos});
-     
     
     }).catch((err) => {
         req.flash("error_msg", "Houve um erro interno ao listar os modelos")
@@ -124,6 +128,48 @@ app.get('/', (req, res) => {
 })
    
 })
+//Teste JSON cpostagens
+app.get('/api', (request, response) => {
+    
+    Postagem.find().lean().populate("categoria").sort({data: "desc"}).populate("modelo").then((postagens) => {
+       
+    Slugtema.find().lean().then((slugtemas) => {
+        
+
+    Categoria.find().lean().then((categorias) => {
+        
+          
+     Modelo.find().lean().then((modelos) => {
+        
+    
+  /*response.render('index2', {postagens: postagens,slugtemas: slugtemas,categorias: categorias,modelos: modelos});*/
+  
+  return response.json(postagens);
+ 
+  
+  
+    }).catch((err) => {
+        req.flash("error_msg", "Houve um erro interno ao listar os modelos")
+        res.redirect("/")
+})
+
+}).catch((err) => {
+    req.flash("error_msg", "Houve um erro interno ao listar as categorias")
+    res.redirect("/")
+})
+
+}).catch((err) => {
+    req.flash("error_msg", "Houve um erro interno ao listar os slugtemas")
+    res.redirect("/")
+})
+
+}).catch((err) => {
+    req.flash("error_msg", "Houve um erro interno ao listar as postagens")
+    res.redirect("/")
+})
+   
+})
+/////
 
             //Listar temas disponiveis
         app.get("/temas/:slugtema", (req, res) => {
