@@ -128,6 +128,40 @@ app.get('/', (req, res) => {
 })
    
 })
+
+app.post("/add", (req, res) => {
+
+    
+        const post ={
+       
+            nome: req.body.nome,
+            equipe: req.body.equipe,
+            cidade: req.body.cidade,
+            
+    };
+
+
+    
+
+    /*post.save().then(() => {
+          
+        req.flash("success_msg", "Postagem criada com sucesso!")
+        res.redirect("/Imagem")
+       
+    }).catch((err) => {
+        req.flash("error_msg", "Houve um erro durante o salvamento da postagem")
+        res.redirect("/Imagem")
+    })*/
+    
+        
+    })
+
+    ///////////////////////////////////////////
+    app.get("/Imagem", (req, res) => {
+       res.render("Imagem.handlebars")
+})
+    
+
 //Teste JSON cpostagens
 app.get('/api', (request, response) => {
     
